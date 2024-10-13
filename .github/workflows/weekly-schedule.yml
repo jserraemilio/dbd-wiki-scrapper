@@ -1,38 +1,41 @@
 name: "Scrape DBD Wiki & save it to Supabase every week on sunday"
 
-on: workflow_dispatch
-# on:
-#   schedule:
-#     - cron: "0 0 * * 0"
+# Enable this line and disable de schedule one, if manually execution is needed
+#on: workflow_dispatch
+on:
+  schedule:
+    - cron: "0 0 * * 0"
 
 jobs:
   scrape-and-save:
     runs-on: ubuntu-latest
 
     steps:
-      # Paso 1: Clonar el repositorio
+      # Step 1: Clone repository
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # Paso 2: Configurar Node.js
+      # Step 2: Configure Node.js
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: "20"
 
-      # Paso 3: Instalar dependencias
+      # Step 3: Install dependencies
       - name: Install dependencies
         run: npm ci
 
+      # Step 4: Install playwright browsers
       - name: Download browsers for Playwright
         run: npx playwright install --with-deps
 
+      # Step 5: Set env variables (this secrets come from Repository Secrets on repo settings)
       - name: Set environment variables
         run: |
           echo "API_URL=${{ secrets.API_URL }}" >> $GITHUB_ENV
           echo "API_KEY=${{ secrets.API_KEY }}" >> $GITHUB_ENV
 
-      # Paso 4: Ejecutar el script
+      # Step 6: Run script
       - name: Run the script
         run: node index.mjs
         env:

@@ -24,7 +24,6 @@ await insertData()
 
 // Scrape Dbd Wiki and return array of objects (perks and survivors data)
 async function getSurvivorPerks(){
-  // const browser = await chromium.launch({headless: true})
   const browser = await chromium.launch()
 
   const page = await browser.newPage()
