@@ -1,7 +1,11 @@
 import { chromium } from "playwright"
 import { createClient } from '@supabase/supabase-js'
 
+import { defineConfig } from '@playwright/test';
 
+export default defineConfig({
+  timeout: 120000,
+});
 
 const survivorPerks = await getSurvivorPerks()
 // Transform scrapped data
