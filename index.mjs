@@ -1,11 +1,7 @@
 import { chromium } from "playwright"
 import { createClient } from '@supabase/supabase-js'
 
-import { defineConfig } from '@playwright/test';
 
-export default defineConfig({
-  timeout: 120000,
-});
 
 const survivorPerks = await getSurvivorPerks()
 // Transform scrapped data
@@ -28,12 +24,13 @@ await insertData()
 
 // Scrape Dbd Wiki and return array of objects (perks and survivors data)
 async function getSurvivorPerks(){
-  const browser = await chromium.launch({headless: true})
+  // const browser = await chromium.launch({headless: true})
+  const browser = await chromium.launch()
 
   const page = await browser.newPage()
 
   await page.goto(
-      'https://deadbydaylight.fandom.com/wiki/Survivor_Perks'
+      'https://deadbydaylight.fandom.com/wiki/Survivor_Perks', { waitUntil: 'domcontentloaded', timeout: 600000 }
   )
 
   const survivorPerks = await page.$$eval(
