@@ -20,6 +20,9 @@ jobs:
         with:
           node-version: "20"
 
+      - name: Install system dependencies
+        run: sudo apt-get update && sudo apt-get install -y libnss3 libatk-bridge2.0-0 libxcomposite1 libxdamage1 libxrandr2 libgbm-dev
+
       # Paso 3: Instalar dependencias
       - name: Install dependencies
         run: npm install
