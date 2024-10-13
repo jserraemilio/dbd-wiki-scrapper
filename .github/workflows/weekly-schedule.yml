@@ -27,7 +27,7 @@ jobs:
       - name: Install dependencies
         run: npm install
       - name: Download browsers for Playwright
-        run: npx playwright install --with-deps
+        run: sudo npx playwright install --with-deps
 
       - name: Set environment variables
         run: |
