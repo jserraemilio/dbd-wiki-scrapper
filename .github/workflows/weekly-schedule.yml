@@ -18,11 +18,13 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: "18"
+          node-version: "20"
 
       # Paso 3: Instalar dependencias
       - name: Install dependencies
         run: npm install
+      - name: Download browsers for Playwright
+        run: npx playwright install
 
       - name: Set environment variables
         run: |
