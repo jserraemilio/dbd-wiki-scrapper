@@ -1,8 +1,9 @@
-name: "Scrape DBD Wiki & save it to Supabase"
+name: "Scrape DBD Wiki & save it to Supabase every week on sunday"
 
-on:
-  schedule:
-    - cron: "0 0 * * 0"
+on: workflow_dispatch
+# on:
+#   schedule:
+#     - cron: "0 0 * * 0"
 
 jobs:
   scrape-and-save:
@@ -13,22 +14,24 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # Paso 2: Configurar variables de entorno desde Repository Secrets
-      - name: Set environment variables
-        run: |
-          echo NODE_ENV=${{ secrets.NODE_ENV }} >> $GITHUB_ENV
-          echo API_KEY=${{ secrets.API_KEY }} >> $GITHUB_ENV
-
-      # Paso 3: Configurar Node.js
+      # Paso 2: Configurar Node.js
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: "18"
 
-      # Paso 4: Instalar dependencias
+      # Paso 3: Instalar dependencias
       - name: Install dependencies
         run: npm install
 
-      # Paso 5: Ejecutar el script
+      - name: Set environment variables
+        run: |
+          echo "API_URL=${{ secrets.API_URL }}" >> $GITHUB_ENV
+          echo "API_KEY=${{ secrets.API_KEY }}" >> $GITHUB_ENV
+
+      # Paso 4: Ejecutar el script
       - name: Run the script
-        run: node tu-script.js
+        run: node index.jms
+        env:
+          API_URL: ${{ secrets.API_URL }}
+          API_KEY: ${{ secrets.API_KEY }}
