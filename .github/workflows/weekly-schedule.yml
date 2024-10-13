@@ -1,0 +1,34 @@
+name: "Scrape DBD Wiki & save it to Supabase"
+
+on:
+  schedule:
+    - cron: "0 0 * * 0"
+
+jobs:
+  scrape-and-save:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Paso 1: Clonar el repositorio
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Paso 2: Configurar variables de entorno desde Repository Secrets
+      - name: Set environment variables
+        run: |
+          echo NODE_ENV=${{ secrets.NODE_ENV }} >> $GITHUB_ENV
+          echo API_KEY=${{ secrets.API_KEY }} >> $GITHUB_ENV
+
+      # Paso 3: Configurar Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+
+      # Paso 4: Instalar dependencias
+      - name: Install dependencies
+        run: npm install
+
+      # Paso 5: Ejecutar el script
+      - name: Run the script
+        run: node tu-script.js

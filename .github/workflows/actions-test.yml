@@ -1,0 +1,7 @@
+name: "Manual test"
+on: workflow_dispatch
+jobs:
+  dosmth:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo 'Hello World!'
