@@ -4,4 +4,5 @@ jobs:
   dosmth:
     runs-on: ubuntu-latest
     steps:
-      - run: echo 'Hello World!'
+      - run: echo 'Existing secret ${{ secrets.API_URL }}'
+      - run: echo 'NON existing secret ${{ secrets.NO }}'
