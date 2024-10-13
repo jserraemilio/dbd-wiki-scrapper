@@ -31,7 +31,7 @@ jobs:
 
       # Paso 4: Ejecutar el script
       - name: Run the script
-        run: node ./index.jms
+        run: node index.mjs
         env:
           API_URL: ${{ secrets.API_URL }}
           API_KEY: ${{ secrets.API_KEY }}
