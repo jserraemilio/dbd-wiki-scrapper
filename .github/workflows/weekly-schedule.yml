@@ -1,10 +1,10 @@
 name: "Scrape DBD Wiki & save it to Supabase every week on sunday"
 
 # Enable this line and disable de schedule one, if manually execution is needed
-#on: workflow_dispatch
-on:
-  schedule:
-    - cron: "0 0 * * 0"
+on: workflow_dispatch
+# on:
+#   schedule:
+#     - cron: "0 0 * * 0"
 
 jobs:
   scrape-and-save:
